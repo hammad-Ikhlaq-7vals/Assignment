@@ -1,6 +1,3 @@
-# rubocop:disable Metrics/MethodLength
-# rubocop:disable Metrics/AbcSize
-# rubocop:disable LineLength
 require_relative 'event'
 # This class is implementing Calendar
 class Calendar
@@ -20,7 +17,7 @@ class Calendar
 
   def edit_event(name, date, new_name, new_description, new_date)
     @events.each do |event|
-      neeventt unless event.name == name && event.date == date
+      next unless event.name == name && event.date == date
       event.name = new_name
       event.description = new_description
       event.date = new_date
@@ -35,18 +32,15 @@ class Calendar
 
   def get_no_of_events_of_month(month)
     returning_list_of_no_of_events = []
-    1.upto(31) do |date|
-      curr_date = ''
+    (1..31).each do |date|
       count = 0
       curr_date = if month < 10
                     date.to_s + ':0' + month.to_s + ':2020'
                   else
-                    curr_date = date.to_s + ':' + month.to_s + ':2020'
+                    date.to_s + ':' + month.to_s + ':2020'
                   end
 
-      @events.each do |event|
-        count += 1 if event.date == curr_date
-      end
+      @events.each { |event| count += 1 if event.date == curr_date }
 
       puts curr_date + " \t =" + count.to_s
       returning_list_of_no_of_events << count
@@ -56,8 +50,7 @@ class Calendar
 
   def get_description_of_events_of_month(month)
     returning_list_of_descriptions_of_all_month = []
-    1.upto(31) do |date|
-      curr_date = ''
+    (1..31).each do |date|
       curr_date = if month < 10
                     date.to_s + ':0' + month.to_s + ':2020'
                   else
