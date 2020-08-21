@@ -1,6 +1,5 @@
 require_relative 'calendar'
 # rubocop:disable LineLength
-"abs"
 describe Calendar, 'basic scoring' do
   it 'Users can add an event to a specific date in a calendar.' do
     my_cal = Calendar.new
