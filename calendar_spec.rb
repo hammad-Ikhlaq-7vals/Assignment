@@ -38,8 +38,8 @@ describe Calendar, 'basic scoring' do
     calendar.add_event('meeting2', '12:20 AM in home', '20:11:2020')
     calendar.add_event('meeting3', '10:20 AM in school', '30:10:2020')
     events_of_date = calendar.get_events_of_specific_date('30:10:2020')
-    expect(events_of_date[1]).to eq('10:20 AM in school')
-    expect(events_of_date[0]).to eq('11:20 AM in office')
+    expect(events_of_date[1].description).to eq('10:20 AM in school')
+    expect(events_of_date[0].description).to eq('11:20 AM in office')
   end
   it 'Users can view the details of all the events of a month.' do
     calendar = Calendar.new
@@ -47,6 +47,6 @@ describe Calendar, 'basic scoring' do
     calendar.add_event('meeting2', '12:20 AM in home', '20:11:2020')
     calendar.add_event('meeting3', '10:20 AM in school', '10:11:2020')
     description_of_events = calendar.get_description_of_events_of_month(11)
-    expect(description_of_events[0]).to eq('11:20 AM in office')
+    expect(description_of_events[0].description).to eq('11:20 AM in office')
   end
 end

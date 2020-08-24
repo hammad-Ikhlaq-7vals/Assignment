@@ -1,4 +1,5 @@
 require_relative 'event'
+require 'pry'
 # This class is implementing Calendar
 class Calendar
   attr_reader :events
@@ -25,9 +26,9 @@ class Calendar
   end
 
   def get_events_of_specific_date(date)
-    returning_list_of_descriptions = []
-    @events.each { |event| returning_list_of_descriptions << event.description if event.date == date }
-    returning_list_of_descriptions
+    returning_list_of_events = []
+    @events.each { |event| returning_list_of_events << event if event.date == date }
+    returning_list_of_events
   end
 
   def get_no_of_events_of_month(month)
@@ -40,7 +41,7 @@ class Calendar
                     date.to_s + ':' + month.to_s + ':2020'
                   end
 
-      @events.each { |event| count += 1 if event.date == curr_date }
+      @events.each { |event| count = count + 1 if event.date.chomp == curr_date }
 
       puts curr_date + " \t =" + count.to_s
       returning_list_of_no_of_events << count
@@ -49,7 +50,7 @@ class Calendar
   end
 
   def get_description_of_events_of_month(month)
-    returning_list_of_descriptions_of_all_month = []
+    returning_list_of_events_of_all_month = []
     (1..31).each do |date|
       curr_date = if month < 10
                     date.to_s + ':0' + month.to_s + ':2020'
@@ -59,11 +60,11 @@ class Calendar
       puts curr_date + ":\n\n"
 
       @events.each do |event|
-        puts event.description if event.date == curr_date
+        puts event.description if event.date.chomp == curr_date
         puts "\n"
-        returning_list_of_descriptions_of_all_month << event.description
+        returning_list_of_events_of_all_month << event
       end
     end
-    returning_list_of_descriptions_of_all_month
+    returning_list_of_events_of_all_month
   end
 end
