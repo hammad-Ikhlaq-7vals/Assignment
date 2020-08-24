@@ -1,5 +1,4 @@
 require_relative 'event'
-require 'pry'
 # This class is implementing Calendar
 class Calendar
   attr_reader :events

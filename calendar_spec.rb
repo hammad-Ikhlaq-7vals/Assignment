@@ -3,7 +3,7 @@ describe Calendar, 'basic scoring' do
   it 'Users can add an event to a specific date in a calendar.' do
     calendar = Calendar.new
     created_event = calendar.add_event('meeting1', '11:20 AM in office', '30:10:2020')
-    expect(created_event[0].name).to   eq('meeting1')
+    expect(created_event[0].name).to eq('meeting1')
   end
 
   it 'Users can remove an event to a specific date in a calendar.' do
