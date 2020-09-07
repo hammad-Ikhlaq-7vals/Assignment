@@ -3,9 +3,17 @@ require 'date'
 
 def validate_date(string)
   format_ok = string.match(/\d{2}:\d{2}:\d{4}/)
-  parseable = Date.strptime(string, '%d:%m:%Y')
+  parseable = Date.strptime(string, '%d:%m:%Y') rescue false
 
   if format_ok && parseable
+    true
+  else
+    false
+  end
+end
+
+def validate_month(string)
+  if string.to_i >= 1 && string.to_i <= 12
     true
   else
     false
@@ -74,20 +82,28 @@ loop do
     end
   elsif option_from_user == 5
     puts 'Enter the month which number of events you want to print'
-    month = gets.chomp
-    until month.is_a?(Integer)
+    month = Integer(gets.chomp) rescue nil
+    until month.is_a?(Numeric)
       print 'Please enter a numeric value: '
-      month = gets.chomp
+      month = Integer(gets.chomp) rescue nil
     end
-    calendar.get_no_of_events_of_month(month)
+    until validate_month(month)
+      puts 'Invalid Input. Enter Again'
+      month = Integer(gets.chomp) rescue nil
+    end
+      calendar.get_no_of_events_of_month(month)
   elsif option_from_user == 6
     puts 'Enter the month which events you want to print'
-    month = gets.chomp
-    until month.is_a?(Integer)
+    month = Integer(gets.chomp) rescue nil
+    until month.is_a?(Numeric)
       print 'Please enter a numeric value: '
-      month = gets.chomp
+      month = Integer(gets.chomp) rescue nil
     end
-    calendar.get_description_of_events_of_month(month)
+    until validate_month(month)
+      puts 'Invalid Input. Enter Again'
+      month = Integer(gets.chomp) rescue nil
+    end
+      calendar.get_no_of_events_of_month(month)
   else
     puts 'Invalid Input'
   end

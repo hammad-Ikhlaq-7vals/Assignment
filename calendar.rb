@@ -40,9 +40,9 @@ class Calendar
                     date.to_s + ':' + month.to_s + ':2020'
                   end
 
-      @events.each { |event| count = count + 1 if event.date.chomp == curr_date }
+      @events.each { |event| count += 1 if event.date.chomp == curr_date }
 
-      puts curr_date + " \t =" + count.to_s
+      puts curr_date + "  =  " + count.to_s
       returning_list_of_no_of_events << count
     end
     returning_list_of_no_of_events
